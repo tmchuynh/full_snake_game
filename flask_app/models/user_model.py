@@ -4,6 +4,8 @@ from flask import flash
 
 from flask_app.models import highScore_model
 
+import re
+
 
 class User:
     def __init__(self, data):
@@ -11,6 +13,11 @@ class User:
         self.username = data['username']
         self.date_creaed = data['date_creaed']
         self.date_updated = data['date_updated']
+
+    def create_new_user(cls, data):
+        query = "INSERT INTO user (username) VALUES (%(username)s)"
+        results = connectToMySQL(DATABASE).query_db(query, data)
+        return results
 
     def get_all_users(cls):
         query = "SELECT * FROM user"
@@ -55,3 +62,44 @@ class User:
         query = "DELETE FROM user WHERE id = %(user_id)s"
         results = connectToMySQL(DATABASE).query_db(query, data)
         return cls(results)
+    
+    @classmethod
+    def check_database(cls, data):
+        query = "SELECT * FROM user WHERE username = %(username)s"
+        results = connectToMySQL(DATABASE).query_db(query, data)
+        if len(results) == 0:
+            return False
+        return True
+    
+    @staticmethod
+    def validate_username(data):
+        # Search for special characters in a string
+        regex = re.compile(r'[@_!#$%^&*()<>?/\|}{~:]')
+
+        is_valid = True
+
+        # Ensure 'username' key is in the data dictionary and check length and special characters
+        if 'username' not in data:
+            return False  
+
+        username = data['username']
+
+        # Check for special characters
+        if regex.search(username):
+            is_valid = False
+
+        # Check if the username is too short
+        if len(username) < 5:
+            is_valid = False
+
+        # Check if the username already exists in the database
+        this_user = {
+            'username': data['username']
+        }
+        
+        results = User.check_database(this_user)
+
+        if results:
+            is_valid = False
+
+        return is_valid

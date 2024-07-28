@@ -8,13 +8,18 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/button', methods=['POST'])
+@app.route('/new_user', methods=['POST'])
 def create_new_user():
     username = request.form.get('username')
-    saveScore = request.form.get('saveScore')
-    if saveScore:
-        return f'The username submitted was: {username}'
-    return 'Username was not valid'
+    if not User.validate_username(request.form):
+        return redirect('/')
+    
+    new_user = {
+        'username': request.form['username'].capitalize()
+    }
+
+    User.create_new_user(new_user)
+    return redirect('/')
 
 
 if __name__ == '__main__':
