@@ -18,6 +18,11 @@ class User:
         query = "INSERT INTO user (username) VALUES (%(username)s)"
         results = connectToMySQL(DATABASE).query_db(query, data)
         return results
+    
+    def update_user(cls, data):
+        query = "UPDATE user SET username = %(username)s WHERE id = %(id)s"
+        results = connectToMySQL(DATABASE).query_db(query, data)
+        return results
 
     def get_all_users(cls):
         query = "SELECT * FROM user"
