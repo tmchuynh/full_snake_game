@@ -103,7 +103,7 @@ button {
   position: absolute;
   top: 25%;
   left: 25%;
-  min-height: 4rem;
+  min-height: 40rem;
 }
 
 @media screen and (max-width: 800px) {
