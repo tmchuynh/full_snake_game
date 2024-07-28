@@ -415,13 +415,20 @@ const showModal = (message) => {
   modal.style.display = "block";
 };
 
+const showFirstModal = (message) => {
+  document.removeEventListener("keyup", changeDirection);
+  const modal = document.querySelector(".usernameInput");
+  const modalMessage = modal.querySelector(".modal-message");
+  modalMessage.innerText = message;
+  modal.style.display = "block";
+};
+
 function closeModal() {
   document.addEventListener("keyup", changeDirection);
   const modal = document.querySelector(".modal");
   modal.style.display = "none";
 }
 
-
-showModal("Let's play!")
+showFirstModal("Let's play!");
 resetGame();
 setIntervalId = setInterval(initGame, 400);
