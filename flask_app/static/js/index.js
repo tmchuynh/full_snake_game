@@ -1,7 +1,6 @@
 const playBoard = document.querySelector(".play-board");
 const scoreElement = document.querySelector(".score");
 const highScoreElement = document.querySelector(".high-score");
-const controls = document.querySelectorAll(".controls i");
 const obstaclesNum = document.querySelector(".obstacles");
 const increaseObstaclesNum = document.querySelector(".increase");
 const decreaseObstaclesNum = document.querySelector(".decrease");
@@ -35,13 +34,6 @@ let foodColors = generateRandomFoodColors(5); // Object of the colors and point 
 let foodColor = Object.keys(foodColors)[0];
 let foodPoints = Object.values(foodColors)[0];
 highScoreElement.innerText = `High Score: ${highScore}`;
-
-// Calling changeDirection on each key click and passing key dataset value as an object
-controls.forEach(button =>
-  button.addEventListener("click", () =>
-    changeDirection({ key: button.dataset.key })
-  )
-);
 
 const initGame = () => {
   if (gameOver) return handleGameOver();
@@ -212,7 +204,6 @@ const checkGameState = () => {
 
 const handleGameOver = () => {
   clearInterval(setIntervalId);
-  showModal("Game Over! Press OK to replay ...");
   resetGame();
 };
 
@@ -316,12 +307,6 @@ const changeDirection = (e) => {
   }
 };
 
-resetGame();
-setIntervalId = setInterval(initGame, 400);
-setIntervalId = setInterval(checkGameState, 200);
-document.addEventListener("keyup", changeDirection);
-
-
 function updateAll() {
   velocityX = 0;
   velocityY = 0;
@@ -423,6 +408,7 @@ function shuffle(array) {
 }
 
 const showModal = (message) => {
+  document.removeEventListener("keyup", changeDirection);
   const modal = document.querySelector(".modal");
   const modalMessage = modal.querySelector(".modal-message");
   modalMessage.innerText = message;
@@ -430,6 +416,12 @@ const showModal = (message) => {
 };
 
 function closeModal() {
+  document.addEventListener("keyup", changeDirection);
   const modal = document.querySelector(".modal");
   modal.style.display = "none";
 }
+
+
+showModal("Let's play!")
+resetGame();
+setIntervalId = setInterval(initGame, 400);
