@@ -1,3 +1,5 @@
 /database/*.mwb
 /database/*.mwb.bak
 /.env
+/__pycache__
+/.mypy_cache
