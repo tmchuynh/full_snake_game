@@ -56,6 +56,9 @@ class HighScore:
         return True
     
     def create_new_highScore(cls, data):
+        check = HighScore.check_existing_score(data)
+        if check:
+            return None
         query = """INSERT INTO high_score (difficulty, obstacles, obstaclesMove, peacefulMode) 
         VALUES (%(difficulty)s, %(obstacles)s, %(obstaclesMove)s, %(peacefulMode)s) WHERE user_id = %(user_id)s"""
         results = connectToMySQL(DATABASE).query_db(query, data)
