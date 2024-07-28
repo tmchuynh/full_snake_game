@@ -14,6 +14,7 @@ body {
   justify-content: center;
   min-height: 100vh;
   background: #e3f2fd;
+  position: relative;
 }
 
 .wrapper {
@@ -95,6 +96,13 @@ button {
   background: linear-gradient(35deg, red, yellow); /* Gradient colors */
   -webkit-text-fill-color: transparent; /* Make text color transparent */
   background-clip: text; /* Non-prefixed version for other browsers */
+}
+
+.modal {
+  width: 50%;
+  position: absolute;
+  top: 25%;
+  left: 25%;
 }
 
 @media screen and (max-width: 800px) {
