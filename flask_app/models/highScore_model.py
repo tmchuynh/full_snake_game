@@ -38,3 +38,20 @@ class HighScore:
         for result in results:
             list_of_users.append(cls(result))
         return list_of_users
+    
+    def check_existing_score(cls, data):
+        query = """SELECT * FROM high_score WHERE user_id = %(user_id)s
+        AND difficulty = %(difficulty)s
+        AND obstacles = %(obstacles)s
+        AND obstaclesMove = %(obstaclesMove)s
+        AND peacefulMode = %(peacefulMode)s"""
+        results = connectToMySQL(DATABASE).query_db(query, data)
+        if len(results) == 0:
+            return False
+        return True
+    
+    def create_new_highScore(cls, data):
+        query = """INSERT INTO high_score (difficulty, obstacles, obstaclesMove, peacefulMode) 
+        VALUES (%(difficulty)s, %(obstacles)s, %(obstaclesMove)s, %(peacefulMode)s) WHERE user_id = %(user_id)s"""
+        results = connectToMySQL(DATABASE).query_db(query, data)
+        return results
