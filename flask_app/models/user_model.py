@@ -27,16 +27,9 @@ class User:
             list_users.append(cls(result))
         return list_users
 
-    def get_user_by_id(cls, data):
-        query = "SELECT * FROM user WHERE id = %(user_id)s"
-        results = connectToMySQL(DATABASE).query_db(query, data)
-        if not results:
-            return None
-        return cls(results[0])
-
     def get_highScore_by_user(cls, data):
         query = """SELECT * FROM user
-            LEFT JOIN high_score ON high_score.user_id = user.id"""
+            LEFT JOIN high_score ON high_score.user_id = %(user_id)s"""
 
         results = connectToMySQL(DATABASE).query_db(query, data)
 
@@ -61,6 +54,7 @@ class User:
     def delete_user(cls, data):
         query = "DELETE FROM user WHERE id = %(user_id)s"
         results = connectToMySQL(DATABASE).query_db(query, data)
+        highScore_model.delete_highScore(data)
         return cls(results)
     
     @classmethod

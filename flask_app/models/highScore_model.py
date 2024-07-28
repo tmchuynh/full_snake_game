@@ -39,6 +39,11 @@ class HighScore:
             list_of_users.append(cls(result))
         return list_of_users
     
+    def delete_highScore(cls, data):
+        query = "DELETE FROM high_score WHERE user_id = %(user_id)s"
+        results = connectToMySQL(DATABASE).query_db(query, data)
+        return cls(results)
+    
     def check_existing_score(cls, data):
         query = """SELECT * FROM high_score WHERE user_id = %(user_id)s
         AND difficulty = %(difficulty)s
