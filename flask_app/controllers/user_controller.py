@@ -8,9 +8,13 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/{id}', methods=['POST'])
+@app.route('/button', methods=['POST'])
 def create_new_user():
-    button_value = request.form.get('button')
+    button_value = request.form.get('randomButton')
     if button_value:
-        return f'Button was clicked with value: {button_value}'
-    return 'Button was not clicked'
+        return f'Save score button was clicked with value: {button_value}'
+    return 'Save score button was not clicked'
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
