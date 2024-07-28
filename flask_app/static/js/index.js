@@ -407,7 +407,7 @@ function shuffle(array) {
   return array;
 }
 
-const titles = [
+const prefix = [
   "Sir",
   "Lady",
   "Knight",
@@ -496,11 +496,20 @@ const usernames = [
 ]
 
 function randomIndex(array) {
-  return Math.floor(Math.random() * array.length) + 1;
+  return Math.floor(Math.random() * array.length);
 }
 
 function randomNameGenerate() {
-
+  const usernameInput = document.querySelector(".form-control");
+  let username = randomIndex([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+  if (username % 2 == 0) {
+    username = usernames[randomIndex(usernames)];
+  } else {
+    let pre = prefix[randomIndex(prefix)];
+    let suffix = titles_suffixes[randomIndex(titles_suffixes)];
+    username = pre + " " + suffix;
+  }
+  usernameInput.value = username;
 }
 
 const showModal = (message) => {

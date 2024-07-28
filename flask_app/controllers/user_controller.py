@@ -10,10 +10,11 @@ def index():
 
 @app.route('/button', methods=['POST'])
 def create_new_user():
-    button_value = request.form.get('randomButton')
-    if button_value:
-        return f'Save score button was clicked with value: {button_value}'
-    return 'Save score button was not clicked'
+    username = request.form.get('username')
+    saveScore = request.form.get('saveScore')
+    if saveScore:
+        return f'The username submitted was: {username}'
+    return 'Username was not valid'
 
 
 if __name__ == '__main__':
