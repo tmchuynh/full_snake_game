@@ -7,7 +7,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema snake_game
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `snake_game` ;
 
 -- -----------------------------------------------------
 -- Schema snake_game
@@ -18,6 +17,8 @@ USE `snake_game` ;
 -- -----------------------------------------------------
 -- Table `snake_game`.`user`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `snake_game`.`user` ;
+
 CREATE TABLE IF NOT EXISTS `snake_game`.`user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(45) NULL,
@@ -31,15 +32,17 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `snake_game`.`high_score`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `snake_game`.`high_score` ;
+
 CREATE TABLE IF NOT EXISTS `snake_game`.`high_score` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `difficulty` VARCHAR(45) NULL,
   `obstacles` INT NULL,
   `obstaclesMove` VARCHAR(45) BINARY NOT NULL,
-  `date_created` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-  `date_uipdated` DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `peacefulMode` VARCHAR(45) BINARY NOT NULL,
   `user_id` INT NOT NULL,
+  `date_created` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_uipdated` DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   INDEX `fk_high score_user_idx` (`user_id` ASC) VISIBLE,
   CONSTRAINT `fk_high score_user`
