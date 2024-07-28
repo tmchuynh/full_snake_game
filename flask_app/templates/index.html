@@ -66,7 +66,16 @@
       <a class="close-button" onclick="closeModal()">&times;</a>
       <h1 class="modal-message"></h1>
       <code class="modal-dialog m-0">Would you like to save your score?</code>
-      <input type="text" id="username" name="username" class="form-control" placeholder="Username">
+      <div class="d-flex flex-column">
+        <div class="d-flex">
+          <input type="text" id="username" name="username" class="form-control" placeholder="Username">
+          <button class="btn btn-secondary">Random name</button>
+        </div>
+        <div class="d-flex">
+          <button class="btn btn-danger">No thanks</button>
+          <button class="btn btn-primary">Save score</button>
+        </div>
+      </div>
     </div>
   </div>
 
