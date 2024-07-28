@@ -495,6 +495,10 @@ const usernames = [
   "StormBringer99"
 ]
 
+function randomIndex(array) {
+  return Math.floor(Math.random() * array.length) + 1;
+}
+
 function randomNameGenerate() {
 
 }
