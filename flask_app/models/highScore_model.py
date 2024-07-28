@@ -44,6 +44,11 @@ class HighScore:
         results = connectToMySQL(DATABASE).query_db(query, data)
         return cls(results)
     
+    def get_highScore_by_user_obstacles(cls, data):
+        query = "SELECT * FROM high_score WHERE user_id = %(user_id)s AND obstacles = %(obstacles)s"
+        results = connectToMySQL(DATABASE).query_db(query, data)
+        return results
+    
     def check_existing_score(cls, data):
         query = """SELECT * FROM high_score WHERE user_id = %(user_id)s
         AND difficulty = %(difficulty)s
@@ -52,6 +57,11 @@ class HighScore:
         AND peacefulMode = %(peacefulMode)s"""
         results = connectToMySQL(DATABASE).query_db(query, data)
         if len(results) == 0:
+            # exact high score doesn't exist
+            return False
+        if (HighScore.get_highScore_by_user_obstacles(data)):
+            # If the user already has a high score with this many obstacles
+            HighScore.update_obstacles_highScore(data)
             return False
         return True
     
@@ -61,5 +71,19 @@ class HighScore:
             return None
         query = """INSERT INTO high_score (difficulty, obstacles, obstaclesMove, peacefulMode) 
         VALUES (%(difficulty)s, %(obstacles)s, %(obstaclesMove)s, %(peacefulMode)s) WHERE user_id = %(user_id)s"""
+        results = connectToMySQL(DATABASE).query_db(query, data)
+        return results
+    
+    def update_highScore(cls, data):
+        query = """
+        UPDATE high_score SET difficulty = %(difficulty)s, obstacles = %(obstacles)s, obstaclesMove = %(obstaclesMove)s,
+        peacefulMode = %(peacefulMode)s WHERE user_id = %(user_id)s"""
+        results = connectToMySQL(DATABASE).query_db(query, data)
+        return results
+    
+    def update_obstacles_highScore(cls, data):
+        query = """
+        UPDATE high_score SET difficulty = %(difficulty)s, obstaclesMove = %(obstaclesMove)s,
+        peacefulMode = %(peacefulMode)s WHERE user_id = %(user_id)s AND obstacles = %(obstacles)s"""
         results = connectToMySQL(DATABASE).query_db(query, data)
         return results
