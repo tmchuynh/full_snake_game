@@ -1,0 +1,109 @@
+/* Import Google font */
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #e3f2fd;
+}
+
+.wrapper {
+  width: 75vmin;
+  height: 80vmin;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 5px;
+  background: #293447;
+  box-shadow: 0 20px 40px rgba(52, 87, 220, 0.2);
+}
+
+.game-details {
+  color: #b8c6dc;
+  font-weight: 500;
+  font-size: 1.2rem;
+  padding: 20px 27px;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.snake-head-collision {
+  background-image: url("./src/img/explosion.png");
+  background-size: contain;
+}
+
+.obstaclesDetails {
+  width: 100%;
+}
+
+input {
+  border: none;
+  width: 3.75rem;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield; /* For Firefox */
+  -webkit-appearance: none; /* For Chrome, Safari, and newer Edge */
+  appearance: none;
+}
+
+/* Hide the arrows for Firefox */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.form-check-input:focus {
+  border: none;
+  box-shadow: none;
+}
+
+button {
+  margin: 1px;
+}
+
+.levels button {
+  box-shadow: 3px 5px 12px 1px rgba(115, 115, 115, 0.36);
+}
+
+.play-board {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  background: #212837;
+  grid-template: repeat(30, 1fr) / repeat(30, 1fr);
+}
+
+.play-board .obstacle {
+  font-size: 1.5rem;
+}
+
+.gradient-text {
+  font-weight: bold; /* Make text bold */
+  background: linear-gradient(35deg, red, yellow); /* Gradient colors */
+  -webkit-text-fill-color: transparent; /* Make text color transparent */
+  background-clip: text; /* Non-prefixed version for other browsers */
+}
+
+@media screen and (max-width: 800px) {
+  .wrapper {
+    width: 90vmin;
+    height: 115vmin;
+  }
+  .game-details {
+    font-size: 1rem;
+    padding: 15px 27px;
+  }
+}
