@@ -407,6 +407,98 @@ function shuffle(array) {
   return array;
 }
 
+const titles = [
+  "Sir",
+  "Lady",
+  "Knight",
+  "Dame",
+  "Lord",
+  "Baron",
+  "Baroness",
+  "Duke",
+  "Duchess",
+  "Prince",
+  "Princess",
+  "Marquis",
+  "Marchioness",
+  "Count",
+  "Countess",
+  "Viscount",
+  "Viscountess",
+  "Squire",
+  "Noble",
+  "Ruler",
+  "Monarch",
+  "Queen",
+  "King",
+  "Emperor",
+  "Empress",
+  "Sovereign",
+  "Chancellor",
+  "Governor",
+  "Warden"
+]
+
+const titles_suffixes = [
+  "of Oxford",
+  "of Avalon",
+  "from Camelot",
+  "of the Realm",
+  "of the Highlands",
+  "from the Court",
+  "of the Order",
+  "of the Keep",
+  "from the Kingdom",
+  "of the Castle",
+  "from the Guild",
+  "of the House",
+  "of the Clan",
+  "from the Province",
+  "of the Duchy",
+  "from the Fortress",
+  "of the Enclave",
+  "from the City",
+  "of the Isle",
+  "from the Region",
+  "of the Heritage",
+  "of the Crown",
+  "from the Estate",
+  "of the Manor",
+  "of the Empire"
+]
+
+const usernames = [
+  "FrostyNinja42",
+  "EpicGamerX",
+  "MysticWizard99",
+  "ShadowHunter7",
+  "StarGazer23",
+  "DragonRider88",
+  "QuantumKnight",
+  "LunarEclipse7",
+  "SilentStorm33",
+  "RogueWarrior21",
+  "GoldenPhoenix",
+  "CelestialVoyager",
+  "NebulaWalker",
+  "TurboFalcon",
+  "StealthAssassin",
+  "CosmicExplorer",
+  "ThunderStrike5",
+  "ArcaneMage77",
+  "NebulaRider",
+  "DarkPhoenix88",
+  "SolarFlare42",
+  "SilverArrow",
+  "GalacticHero",
+  "MysticNinja",
+  "StormBringer99"
+]
+
+function randomNameGenerate() {
+
+}
+
 const showModal = (message) => {
   document.removeEventListener("keyup", changeDirection);
   const modal = document.querySelector(".modal");
