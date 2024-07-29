@@ -14,17 +14,20 @@ class User:
         self.date_creaed = data['date_creaed']
         self.date_updated = data['date_updated']
 
+    @classmethod
     def create_new_user(cls, data):
         if (not User.check_database(data)) or (User.validate_username(data)):
             query = "INSERT INTO user (username) VALUES (%(username)s)"
             results = connectToMySQL(DATABASE).query_db(query, data)
         return results
 
+    @classmethod
     def update_user(cls, data):
         query = "UPDATE user SET username = %(username)s WHERE id = %(id)s"
         results = connectToMySQL(DATABASE).query_db(query, data)
         return results
 
+    @classmethod
     def get_all_users(cls):
         query = "SELECT * FROM user"
         results = connectToMySQL(DATABASE).query_db(query)
@@ -33,6 +36,7 @@ class User:
             list_users.append(cls(result))
         return list_users
 
+    @classmethod
     def get_highScore_by_user(cls, data):
         query = """SELECT * FROM user
             LEFT JOIN high_score ON high_score.user_id = %(user_id)s"""
@@ -57,6 +61,7 @@ class User:
             return user
         return []
 
+    @classmethod
     def delete_user(cls, data):
         query = "DELETE FROM user WHERE id = %(user_id)s"
         results = connectToMySQL(DATABASE).query_db(query, data)
