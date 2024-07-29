@@ -55,6 +55,12 @@ class HighScore:
         return results
     
     @classmethod
+    def get_highScore_by_user_obstacles_and_peacefulMode(cls, data):
+        query = "SELECT * FROM high_score WHERE user_id = %(user_id)s AND obstacles = %(obstacles)s AND %(peacefulMode)s"
+        results = connectToMySQL(DATABASE).query_db(query, data)
+        return results
+    
+    @classmethod
     def check_existing_score(cls, data):
         query = """SELECT * FROM high_score WHERE user_id = %(user_id)s
         AND difficulty = %(difficulty)s
