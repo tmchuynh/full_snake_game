@@ -15,10 +15,11 @@ class User:
         self.date_updated = data['date_updated']
 
     def create_new_user(cls, data):
-        query = "INSERT INTO user (username) VALUES (%(username)s)"
-        results = connectToMySQL(DATABASE).query_db(query, data)
+        if (not User.check_database(data)) or (User.validate_username(data)):
+            query = "INSERT INTO user (username) VALUES (%(username)s)"
+            results = connectToMySQL(DATABASE).query_db(query, data)
         return results
-    
+
     def update_user(cls, data):
         query = "UPDATE user SET username = %(username)s WHERE id = %(id)s"
         results = connectToMySQL(DATABASE).query_db(query, data)
@@ -61,7 +62,7 @@ class User:
         results = connectToMySQL(DATABASE).query_db(query, data)
         highScore_model.delete_highScore(data)
         return cls(results)
-    
+
     @classmethod
     def check_database(cls, data):
         query = "SELECT * FROM user WHERE username = %(username)s"
@@ -69,7 +70,7 @@ class User:
         if len(results) == 0:
             return False
         return True
-    
+
     @staticmethod
     def validate_username(data):
         # Search for special characters in a string
@@ -79,7 +80,7 @@ class User:
 
         # Ensure 'username' key is in the data dictionary and check length and special characters
         if 'username' not in data:
-            return False  
+            return False
 
         username = data['username']
 
@@ -95,7 +96,7 @@ class User:
         this_user = {
             'username': data['username']
         }
-        
+
         results = User.check_database(this_user)
 
         if results:

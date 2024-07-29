@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 # Load environment variables from .env file
 load_dotenv()
 
+
 class MySQLConnection:
     def __init__(self, db):
         connection = pymysql.connect(
@@ -36,6 +37,7 @@ class MySQLConnection:
                 return False
             finally:
                 self.connection.close()
+
 
 def connectToMySQL(db):
     return MySQLConnection(db)
