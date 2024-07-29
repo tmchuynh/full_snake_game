@@ -16,9 +16,8 @@ class User:
 
     @classmethod
     def create_new_user(cls, data):
-        if (not User.check_database(data)) or (User.validate_username(data)):
-            query = "INSERT INTO user (username) VALUES (%(username)s)"
-            results = connectToMySQL(DATABASE).query_db(query, data)
+        query = "INSERT INTO user (username) VALUES (%(username)s)"
+        results = connectToMySQL(DATABASE).query_db(query, data)
         return results
 
     @classmethod
@@ -73,6 +72,7 @@ class User:
         query = "SELECT * FROM user WHERE username = %(username)s"
         results = connectToMySQL(DATABASE).query_db(query, data)
         if len(results) == 0:
+            # the user does not exist yet
             return False
         return True
 

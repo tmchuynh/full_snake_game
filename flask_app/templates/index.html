@@ -60,28 +60,6 @@
     </div>
   </div>
 
-  <div id="modal" class="modal usernameInput">
-    <div class="modal-content">
-      <a class="close-button" onclick="closeModal()">&times;</a>
-      <h1 class="modal-message"></h1>
-      <code class="modal-dialog m-0">Would you like to save your score?</code>
-      <div class="d-flex flex-column">
-        <form action="/new_user" method="post">
-          <div class="d-flex">
-            <input type="text" id="username" name="username" class="form-control" placeholder="Username">
-            <button class="btn btn-secondary" onclick="randomNameGenerate()" name="button" value="randomButton" type="button">Random
-              name</button>
-          </div>
-          <div class="d-flex">
-            <button class="btn btn-danger" type="button" onclick="closeModal()">No thanks</button>
-            <button class="btn btn-primary" type="submit" name="saveScore" value="saveScore">Save score</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>

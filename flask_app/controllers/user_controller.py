@@ -5,21 +5,32 @@ from flask_app.models.user_model import User
 
 @app.route('/')
 def index():
+    return render_template('opening.html')
+
+@app.route('/snake_game')
+def new_game():
     return render_template('index.html')
 
 
 @app.route('/new_user', methods=['POST'])
 def create_new_user():
     username = request.form.get('username')
-    if not User.validate_username(request.form):
-        return redirect('/')
+    noButton = request.form.get('noButton')
+
+    if noButton:
+        return f'no thanks button clicked'
+
+    # if not User.validate_username(request.form):
+    #     return redirect('/')
+    # if User.check_database(username):
+    #     return redirect('/')
     
     new_user = {
         'username': request.form['username'].capitalize()
     }
 
-    User.create_new_user(new_user)
-    return redirect('/')
+    # User.create_new_user(new_user)
+    return redirect('/snake_game')
 
 
 if __name__ == '__main__':
