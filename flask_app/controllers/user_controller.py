@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, flash, render_template, request, redirect, session
 from flask_app import app
 from flask_app.models.user_model import User
 
@@ -20,16 +20,18 @@ def create_new_user():
     if noButton:
         return f'no thanks button clicked'
 
-    # if not User.validate_username(request.form):
-    #     return redirect('/')
-    # if User.check_database(username):
-    #     return redirect('/')
+    if not User.validate_username(request.form):
+        flash("Usernames cannot contain special characters and cannot be less than 5 characters in length", "registration_failure")
+        return redirect('/')
+    if User.check_database(username):
+        flash("The username " + username + " already exists.", "registration_failure")
+        return redirect('/')
     
     new_user = {
         'username': request.form['username'].capitalize()
     }
 
-    # User.create_new_user(new_user)
+    User.create_new_user(new_user)
     return redirect('/snake_game')
 
 

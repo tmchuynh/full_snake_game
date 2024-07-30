@@ -18,6 +18,7 @@ class User:
     def create_new_user(cls, data):
         query = "INSERT INTO user (username) VALUES (%(username)s)"
         results = connectToMySQL(DATABASE).query_db(query, data)
+        flash("The username " + data['username'] + " has been added to the leaderboard", "registration")
         return results
 
     @classmethod
@@ -95,16 +96,6 @@ class User:
 
         # Check if the username is too short
         if len(username) < 5:
-            is_valid = False
-
-        # Check if the username already exists in the database
-        this_user = {
-            'username': data['username']
-        }
-
-        results = User.check_database(this_user)
-
-        if results:
             is_valid = False
 
         return is_valid
