@@ -19,7 +19,6 @@ def create_new_user():
 
     if noButton:
         return f'no thanks button clicked'
-
     if not User.validate_username(request.form):
         flash("Usernames cannot contain special characters and cannot be less than 5 characters in length", "registration_failure")
         return redirect('/')

@@ -25,6 +25,7 @@
                             value="randomButton" type="button">Random
                             name</button>
                     </div>
+
                     {% for message in get_flashed_messages(category_filter = ['registration']) %}
                     <div class="alert alert-success">
                         {{ message }}
@@ -36,7 +37,7 @@
                         {{ message }}
                     </div>
                     {% endfor %}
-                    
+
                     <div class="d-flex">
                         <button class="btn btn-danger" type="button" name="noButton">No thanks</button>
                         <button class="btn btn-primary" type="submit" name="saveScore" value="saveScore">Save
