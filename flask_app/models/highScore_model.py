@@ -16,7 +16,7 @@ class HighScore:
 
     @classmethod
     def get_all_highScores(cls):
-        query = "SELECT * FROM high_score"
+        query = "SELECT * FROM high_score LEFT JOIN user ON user.id = high_score.user_id"
         results = connectToMySQL(DATABASE).query_db(query)
         list_highScores = []
         for result in results:
