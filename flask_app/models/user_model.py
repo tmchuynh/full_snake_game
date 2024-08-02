@@ -39,7 +39,7 @@ class User:
     @classmethod
     def get_highScore_by_user(cls, data):
         query = """SELECT * FROM user
-            LEFT JOIN high_score ON high_score.user_id = %(user_id)s"""
+            LEFT JOIN high_score ON high_score.user_id = %(user_id)s LIMIT 1"""
 
         results = connectToMySQL(DATABASE).query_db(query, data)
 
@@ -70,7 +70,7 @@ class User:
 
     @classmethod
     def check_database(cls, data):
-        query = "SELECT * FROM user WHERE username = %(username)s"
+        query = "SELECT * FROM user WHERE username = '%(username)s'"
         results = connectToMySQL(DATABASE).query_db(query, data)
         if len(results) == 0:
             # the user does not exist yet
