@@ -7,11 +7,12 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema snake_game
 -- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `snake_game` ;
 
 -- -----------------------------------------------------
 -- Schema snake_game
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `snake_game` DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA IF NOT EXISTS `snake_game` DEFAULT CHARACTER SET utf8mb3 ;
 USE `snake_game` ;
 
 -- -----------------------------------------------------
@@ -21,12 +22,13 @@ DROP TABLE IF EXISTS `snake_game`.`user` ;
 
 CREATE TABLE IF NOT EXISTS `snake_game`.`user` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(45) NULL,
+  `username` VARCHAR(45) NULL DEFAULT NULL,
   `date_created` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   `date_updated` DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
@@ -36,10 +38,10 @@ DROP TABLE IF EXISTS `snake_game`.`high_score` ;
 
 CREATE TABLE IF NOT EXISTS `snake_game`.`high_score` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `difficulty` VARCHAR(45) NULL,
-  `obstacles` INT NULL,
-  `obstaclesMove` VARCHAR(45) BINARY NOT NULL,
-  `peacefulMode` VARCHAR(45) BINARY NOT NULL,
+  `difficulty` VARCHAR(45) NULL DEFAULT NULL,
+  `obstacles` INT NULL DEFAULT NULL,
+  `obstaclesMove` VARCHAR(45) CHARACTER SET 'utf8mb3' NOT NULL,
+  `peacefulMode` VARCHAR(45) CHARACTER SET 'utf8mb3' NOT NULL,
   `user_id` INT NOT NULL,
   `date_created` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   `date_uipdated` DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -47,10 +49,9 @@ CREATE TABLE IF NOT EXISTS `snake_game`.`high_score` (
   INDEX `fk_high score_user_idx` (`user_id` ASC) VISIBLE,
   CONSTRAINT `fk_high score_user`
     FOREIGN KEY (`user_id`)
-    REFERENCES `snake_game`.`user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    REFERENCES `snake_game`.`user` (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
