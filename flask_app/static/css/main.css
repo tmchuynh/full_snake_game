@@ -19,11 +19,12 @@ body {
 
 .wrapper {
   width: 75vmin;
-  height: 80vmin;
+  height: 75vmin;
   display: flex;
   overflow: hidden;
   flex-direction: column;
   justify-content: center;
+  position: relative;
   border-radius: 5px;
   background: #293447;
   box-shadow: 0 20px 40px rgba(52, 87, 220, 0.2);
@@ -33,7 +34,10 @@ body {
   color: #b8c6dc;
   font-weight: 500;
   font-size: 1.2rem;
-  padding: 20px 27px;
+  padding: 1em 3em;
+  position: absolute;
+  top: 0;
+  width: 100%;
   height: auto;
   display: flex;
   justify-content: space-between;
@@ -85,6 +89,7 @@ button {
   display: grid;
   background: #212837;
   grid-template: repeat(30, 1fr) / repeat(30, 1fr);
+  margin-top: 8.5em;
 }
 
 .play-board .obstacle {

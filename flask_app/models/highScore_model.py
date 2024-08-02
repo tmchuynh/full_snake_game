@@ -14,14 +14,16 @@ class HighScore:
         self.date_created = data['date_created']
         self.date_updated = data['date_updated']
 
+    @classmethod
     def get_all_highScores(cls):
-        query = "SELECT * FROM high_score"
+        query = "SELECT * FROM high_score LEFT JOIN user ON user.id = high_score.user_id"
         results = connectToMySQL(DATABASE).query_db(query)
         list_highScores = []
         for result in results:
             list_highScores.append(cls(result))
         return list_highScores
 
+    @classmethod
     def get_highScore_by_user(cls, data):
         query = "SELECT * FROM high_score WHERE user_id = %(user_id)s"
         results = connectToMySQL(DATABASE).query_db(query, data)
@@ -29,6 +31,7 @@ class HighScore:
             return None
         return cls(results[0])
 
+    @classmethod
     def get_highScore_by_difficulty(cls, data):
         query = "SELECT * FROM high_score WHERE difficulty = %(difficulty)s"
         results = connectToMySQL(DATABASE).query_db(query, data)
@@ -39,16 +42,25 @@ class HighScore:
             list_of_users.append(cls(result))
         return list_of_users
     
+    @classmethod
     def delete_highScore(cls, data):
         query = "DELETE FROM high_score WHERE user_id = %(user_id)s"
         results = connectToMySQL(DATABASE).query_db(query, data)
         return cls(results)
     
+    @classmethod
     def get_highScore_by_user_obstacles(cls, data):
         query = "SELECT * FROM high_score WHERE user_id = %(user_id)s AND obstacles = %(obstacles)s"
         results = connectToMySQL(DATABASE).query_db(query, data)
         return results
     
+    @classmethod
+    def get_highScore_by_user_obstacles_and_peacefulMode(cls, data):
+        query = "SELECT * FROM high_score WHERE user_id = %(user_id)s AND obstacles = %(obstacles)s AND %(peacefulMode)s"
+        results = connectToMySQL(DATABASE).query_db(query, data)
+        return results
+    
+    @classmethod
     def check_existing_score(cls, data):
         query = """SELECT * FROM high_score WHERE user_id = %(user_id)s
         AND difficulty = %(difficulty)s
@@ -65,6 +77,7 @@ class HighScore:
             return False
         return True
     
+    @classmethod
     def create_new_highScore(cls, data):
         check = HighScore.check_existing_score(data)
         if check:
@@ -74,6 +87,7 @@ class HighScore:
         results = connectToMySQL(DATABASE).query_db(query, data)
         return results
     
+    @classmethod
     def update_highScore(cls, data):
         query = """
         UPDATE high_score SET difficulty = %(difficulty)s, obstacles = %(obstacles)s, obstaclesMove = %(obstaclesMove)s,
@@ -81,6 +95,7 @@ class HighScore:
         results = connectToMySQL(DATABASE).query_db(query, data)
         return results
     
+    @classmethod
     def update_obstacles_highScore(cls, data):
         query = """
         UPDATE high_score SET difficulty = %(difficulty)s, obstaclesMove = %(obstaclesMove)s,
