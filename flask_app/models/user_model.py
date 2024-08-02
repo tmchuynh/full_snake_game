@@ -35,9 +35,6 @@ class User:
         for result in results:
             list_users.append(cls(result))
         return list_users
-
-    @classmethod
-    def get_highScore_by_user(cls, data):
         query = """SELECT * FROM user
             LEFT JOIN high_score ON high_score.user_id = %(user_id)s LIMIT 1"""
 
