@@ -33,7 +33,7 @@ class HighScore:
 
     @classmethod
     def get_highScore_by_difficulty(cls, data):
-        query = "SELECT * FROM high_score WHERE difficulty = %(difficulty)s"
+        query = "SELECT * FROM high_score WHERE difficulty = '%(difficulty)s'"
         results = connectToMySQL(DATABASE).query_db(query, data)
         if not results:
             return None
@@ -63,7 +63,7 @@ class HighScore:
     @classmethod
     def check_existing_score(cls, data):
         query = """SELECT * FROM high_score WHERE user_id = %(user_id)s
-        AND difficulty = %(difficulty)s
+        AND difficulty = '%(difficulty)s'
         AND obstacles = %(obstacles)s
         AND obstaclesMove = %(obstaclesMove)s
         AND peacefulMode = %(peacefulMode)s"""
@@ -83,14 +83,14 @@ class HighScore:
         if check:
             return None
         query = """INSERT INTO high_score (difficulty, obstacles, obstaclesMove, peacefulMode) 
-        VALUES (%(difficulty)s, %(obstacles)s, %(obstaclesMove)s, %(peacefulMode)s) WHERE user_id = %(user_id)s"""
+        VALUES ('%(difficulty)s', %(obstacles)s, %(obstaclesMove)s, %(peacefulMode)s) WHERE user_id = %(user_id)s"""
         results = connectToMySQL(DATABASE).query_db(query, data)
         return results
     
     @classmethod
     def update_highScore(cls, data):
         query = """
-        UPDATE high_score SET difficulty = %(difficulty)s, obstacles = %(obstacles)s, obstaclesMove = %(obstaclesMove)s,
+        UPDATE high_score SET difficulty = '%(difficulty)s', obstacles = %(obstacles)s, obstaclesMove = %(obstaclesMove)s,
         peacefulMode = %(peacefulMode)s WHERE user_id = %(user_id)s"""
         results = connectToMySQL(DATABASE).query_db(query, data)
         return results
@@ -98,7 +98,7 @@ class HighScore:
     @classmethod
     def update_obstacles_highScore(cls, data):
         query = """
-        UPDATE high_score SET difficulty = %(difficulty)s, obstaclesMove = %(obstaclesMove)s,
+        UPDATE high_score SET difficulty = '%(difficulty)s', obstaclesMove = %(obstaclesMove)s,
         peacefulMode = %(peacefulMode)s WHERE user_id = %(user_id)s AND obstacles = %(obstacles)s"""
         results = connectToMySQL(DATABASE).query_db(query, data)
         return results
