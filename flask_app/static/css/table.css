@@ -1,0 +1,9 @@
+.table thead button {
+      background-color: transparent;
+      border: none;
+}
+
+.table thead button:hover i {
+      font-weight: bold;
+      color: red;
+}
