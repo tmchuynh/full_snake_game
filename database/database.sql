@@ -1,60 +1,21 @@
--- MySQL Workbench Forward Engineering
+SELECT * FROM high_score;
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+SELECT * FROM user;
 
--- -----------------------------------------------------
--- Schema snake_game
--- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `snake_game` ;
+INSERT INTO user (username)
+VALUES ("Michael"), ("Janet"), ("Natasha");
 
--- -----------------------------------------------------
--- Schema snake_game
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `snake_game` DEFAULT CHARACTER SET utf8mb3 ;
-USE `snake_game` ;
+INSERT INTO high_score (high_score, difficulty, obstacles, obstaclesMove, peacefulMode, user_id)
+VALUES (13, "hard", 14, 1, 1, 1),
+(24, "medium", 7, 0, 1, 2),
+(18, "easy", 4, 0, 0, 3),
+(18, "medium", 8, 1, 0, 1),
+(13, "Hard", 28, 1, 1, 2),
+(38, "easy", 2, 1, 0, 2);
 
--- -----------------------------------------------------
--- Table `snake_game`.`user`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `snake_game`.`user` ;
+INSERT INTO high_score (high_score, difficulty, obstacles, obstaclesMove, peacefulMode, user_id)
+VALUES (43, "easy", 4, 0, 1, 3);
 
-CREATE TABLE IF NOT EXISTS `snake_game`.`user` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(45) NULL DEFAULT NULL,
-  `date_created` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-  `date_updated` DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb3;
-
-
--- -----------------------------------------------------
--- Table `snake_game`.`high_score`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `snake_game`.`high_score` ;
-
-CREATE TABLE IF NOT EXISTS `snake_game`.`high_score` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `high_score` INT NOT NULL,
-  `difficulty` VARCHAR(45) NULL DEFAULT NULL,
-  `obstacles` INT NULL DEFAULT NULL,
-  `obstaclesMove` VARCHAR(45) CHARACTER SET 'utf8mb3' NOT NULL,
-  `peacefulMode` VARCHAR(45) CHARACTER SET 'utf8mb3' NOT NULL,
-  `user_id` INT NOT NULL,
-  `date_created` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-  `date_uipdated` DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  INDEX `fk_high score_user_idx` (`user_id` ASC) VISIBLE,
-  CONSTRAINT `fk_high score_user`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `snake_game`.`user` (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb3;
-
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+SELECT high_score.*, user.username FROM high_score 
+        LEFT JOIN user ON user.id = high_score.user_id
+        ORDER BY user.username ASC, high_score.high_score DESC, user.username ASC;

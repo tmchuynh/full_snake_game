@@ -2,6 +2,7 @@ from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app import DATABASE
 from flask import flash
 
+from flask_app.models.user_model import User
 
 class HighScore:
     def __init__(self, data):
@@ -14,14 +15,20 @@ class HighScore:
         self.user_id = data['user_id']
         self.date_created = data['date_created']
         self.date_updated = data['date_updated']
+        self.user = None
 
     @classmethod
     def get_all_highScores(cls):
-        query = "SELECT * FROM high_score LEFT JOIN user ON user.id = high_score.user_id"
+        query = """SELECT high_score.*, user.* FROM high_score 
+        LEFT JOIN user ON user.id = high_score.user_id
+        ORDER BY user.username ASC, high_score.high_score DESC"""
         results = connectToMySQL(DATABASE).query_db(query)
+        print("Query Results:", results)
         list_highScores = []
         for result in results:
-            list_highScores.append(cls(result))
+            high_score = cls(result)
+            high_score.user = User(result)
+            list_highScores.append(high_score)
         return list_highScores
 
     @classmethod

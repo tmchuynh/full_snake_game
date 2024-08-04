@@ -23,18 +23,15 @@
                         <th>Peaceful Mode</th>
                   </thead>
                   <tbody>
-                        {% for user in list_of_users: %}
                         {% for score in list_of_highScores: %}
                         <tr>
-                              <td>{{ user.username }}</td>
-
+                              <td>{{ score.user.username }}</td>
                               <td>{{ score.high_score }}</td>
                               <td>{{ score.difficulty }}</td>
                               <td>{{ score.obstacles }}</td>
                               <td>{{ score.obstaclesMove }}</td>
                               <td>{{ score.peacefulMode }}</td>
                         </tr>
-                        {% endfor %}
                         {% endfor %}
                   </tbody>
             </table>

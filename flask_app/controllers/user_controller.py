@@ -24,7 +24,7 @@ def create_new_user():
     if not User.validate_username(new_user):
         flash("Usernames cannot contain special characters and cannot be less than 5 characters in length", "registration_failure")
         return redirect('/')
-    if User.check_database(new_user):
+    if not User.check_database(new_user):
         flash("The username " + username + " already exists.", "registration_failure")
         return redirect('/')
     
