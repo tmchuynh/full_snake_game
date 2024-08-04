@@ -67,7 +67,7 @@ class User:
 
     @classmethod
     def check_database(cls, data):
-        query = "SELECT * FROM user WHERE username = '%(username)s'"
+        query = "SELECT * FROM user WHERE username = %(username)s"
         results = connectToMySQL(DATABASE).query_db(query, data)
         if len(results) == 0:
             # the user does not exist yet

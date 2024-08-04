@@ -16,20 +16,18 @@ def new_game():
 def create_new_user():
     username = request.form.get('username')
     noButton = request.form.get('noButton')
-
-    if noButton:
-        return f'no thanks button clicked'
-    if not User.validate_username(request.form):
-        flash("Usernames cannot contain special characters and cannot be less than 5 characters in length", "registration_failure")
-        return redirect('/')
-    if User.check_database(username):
-        flash("The username " + username + " already exists.", "registration_failure")
-        return redirect('/')
-    
     new_user = {
         'username': request.form['username'].capitalize()
     }
-
+    if noButton:
+        return f'no thanks button clicked'
+    if not User.validate_username(new_user):
+        flash("Usernames cannot contain special characters and cannot be less than 5 characters in length", "registration_failure")
+        return redirect('/')
+    if User.check_database(new_user):
+        flash("The username " + username + " already exists.", "registration_failure")
+        return redirect('/')
+    
     User.create_new_user(new_user)
     return redirect('/snake_game')
 
