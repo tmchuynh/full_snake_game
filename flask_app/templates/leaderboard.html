@@ -29,8 +29,8 @@
                               <td>{{ score.high_score }}</td>
                               <td>{{ score.difficulty }}</td>
                               <td>{{ score.obstacles }}</td>
-                              <td>{{ score.obstaclesMove }}</td>
-                              <td>{{ score.peacefulMode }}</td>
+                              <td>{{ 'False' if score.obstaclesMove == 0 else 'True' }}</td>
+                              <td>{{ 'False' if score.peacefulMode == 0 else 'True' }}</td>
                         </tr>
                         {% endfor %}
                   </tbody>

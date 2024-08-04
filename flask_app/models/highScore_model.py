@@ -10,8 +10,8 @@ class HighScore:
         self.high_score = data['high_score']
         self.difficulty = data['difficulty']
         self.obstacles = data['obstacles']
-        self.obstaclesMove = data['obstaclesMove']
-        self.peacefulMode = data['peacefulMode']
+        self.obstaclesMove = int(data['obstaclesMove'], 0)
+        self.peacefulMode = int(data['peacefulMode'], 0)
         self.user_id = data['user_id']
         self.date_created = data['date_created']
         self.date_updated = data['date_updated']
