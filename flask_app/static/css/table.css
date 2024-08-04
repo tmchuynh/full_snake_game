@@ -7,3 +7,12 @@
       font-weight: bold;
       color: red;
 }
+
+.input-group-text i {
+      color: purple;
+}
+
+.form-control:focus {
+      border: none;
+      box-shadow: none;
+}
