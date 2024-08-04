@@ -36,6 +36,17 @@ class User:
             list_users.append(cls(result))
         return list_users
         
+    @classmethod
+    def order_users_asc(cls):
+        query = "SELECT * FROM user ORDER BY user.username ASC"
+        results = connectToMySQL(DATABASE).query_db(query)
+        return results
+    
+    @classmethod
+    def order_user_desc(cls):
+        query = "SELECCT * FROM user ORDER BY user.username DESC"
+        results = connectToMySQL(DATABASE).query_db(query)
+        return results
 
     @classmethod
     def delete_user(cls, data):

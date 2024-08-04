@@ -31,6 +31,20 @@ class HighScore:
         return list_highScores
 
     @classmethod
+    def order_highScores_asc(cls):
+        query = """SELECT * FROM high_score
+        ORDER BY high_score.high_score ASC"""
+        results = connectToMySQL(DATABASE).query_db(query)
+        return results
+    
+    @classmethod
+    def order_highScores_desc(cls):
+        query = """SELECT * FROM high_score
+        ORDER BY high_score.high_score DESC"""
+        results = connectToMySQL(DATABASE).query_db(query)
+        return results
+
+    @classmethod
     def get_highScore_by_user(cls, data):
         query = "SELECT * FROM high_score WHERE user_id = %(user_id)s"
         results = connectToMySQL(DATABASE).query_db(query, data)
@@ -50,6 +64,20 @@ class HighScore:
         return list_of_users
     
     @classmethod
+    def order_by_difficulty_asc(cls):
+        query = """SELECT * FROM high_score
+        ORDER BY high_score.difficulty ASC"""
+        results = connectToMySQL(DATABASE).query_db(query)
+        return results
+    
+    @classmethod
+    def order_by_difficult_desc(cls):
+        query = """SELECT * FROM high_score
+        ORDER BY high_score.difficulty DESC"""
+        results = connectToMySQL(DATABASE).query_db(query)
+        return results
+    
+    @classmethod
     def delete_highScore(cls, data):
         query = "DELETE FROM high_score WHERE user_id = %(user_id)s"
         results = connectToMySQL(DATABASE).query_db(query, data)
@@ -59,6 +87,20 @@ class HighScore:
     def get_highScore_by_user_obstacles(cls, data):
         query = "SELECT * FROM high_score WHERE user_id = %(user_id)s AND obstacles = %(obstacles)s"
         results = connectToMySQL(DATABASE).query_db(query, data)
+        return results
+    
+    @classmethod
+    def order_highScore_by_obstacles_asc(cls):
+        query = """SELECT * FROM high_score
+        ORDER BY high_score.obstacles ASC"""
+        results = connectToMySQL(DATABASE).query_db(query)
+        return results
+    
+    @classmethod
+    def order_highScore_by_obstacles_desc(cls):
+        query = """SELECT * FROM high_score
+        ORDER BY high_score.obstacles DESC"""
+        results = connectToMySQL(DATABASE).query_db(query)
         return results
     
     @classmethod
