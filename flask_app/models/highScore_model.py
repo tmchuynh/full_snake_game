@@ -6,6 +6,7 @@ from flask import flash
 class HighScore:
     def __init__(self, data):
         self.id = data['id']
+        self.high_score = data['high_score']
         self.difficulty = data['difficulty']
         self.obstacles = data['obstacles']
         self.obstaclesMove = data['obstaclesMove']
@@ -65,6 +66,7 @@ class HighScore:
         query = """SELECT * FROM high_score WHERE user_id = %(user_id)s
         AND difficulty = '%(difficulty)s'
         AND obstacles = %(obstacles)s
+        AND high_score = %(high_score)s
         AND obstaclesMove = %(obstaclesMove)s
         AND peacefulMode = %(peacefulMode)s"""
         results = connectToMySQL(DATABASE).query_db(query, data)
@@ -82,8 +84,8 @@ class HighScore:
         check = HighScore.check_existing_score(data)
         if check:
             return None
-        query = """INSERT INTO high_score (difficulty, obstacles, obstaclesMove, peacefulMode) 
-        VALUES ('%(difficulty)s', %(obstacles)s, %(obstaclesMove)s, %(peacefulMode)s) WHERE user_id = %(user_id)s"""
+        query = """INSERT INTO high_score (difficulty, obstacles, obstaclesMove, peacefulMode, high_score) 
+        VALUES ('%(difficulty)s', %(obstacles)s, %(obstaclesMove)s, %(peacefulMode)s, %(high_score)s) WHERE user_id = %(user_id)s"""
         results = connectToMySQL(DATABASE).query_db(query, data)
         return results
     
@@ -91,7 +93,7 @@ class HighScore:
     def update_highScore(cls, data):
         query = """
         UPDATE high_score SET difficulty = '%(difficulty)s', obstacles = %(obstacles)s, obstaclesMove = %(obstaclesMove)s,
-        peacefulMode = %(peacefulMode)s WHERE user_id = %(user_id)s"""
+        peacefulMode = %(peacefulMode)s, high_score = %(high_score)s WHERE user_id = %(user_id)s"""
         results = connectToMySQL(DATABASE).query_db(query, data)
         return results
     
@@ -99,6 +101,6 @@ class HighScore:
     def update_obstacles_highScore(cls, data):
         query = """
         UPDATE high_score SET difficulty = '%(difficulty)s', obstaclesMove = %(obstaclesMove)s,
-        peacefulMode = %(peacefulMode)s WHERE user_id = %(user_id)s AND obstacles = %(obstacles)s"""
+        peacefulMode = %(peacefulMode)s, high_score = %(high_score)s WHERE user_id = %(user_id)s AND obstacles = %(obstacles)s"""
         results = connectToMySQL(DATABASE).query_db(query, data)
         return results
