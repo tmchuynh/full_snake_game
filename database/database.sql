@@ -38,6 +38,7 @@ DROP TABLE IF EXISTS `snake_game`.`high_score` ;
 
 CREATE TABLE IF NOT EXISTS `snake_game`.`high_score` (
   `id` INT NOT NULL AUTO_INCREMENT,
+  `high_score` INT NOT NULL,
   `difficulty` VARCHAR(45) NULL DEFAULT NULL,
   `obstacles` INT NULL DEFAULT NULL,
   `obstaclesMove` VARCHAR(45) CHARACTER SET 'utf8mb3' NOT NULL,

@@ -11,7 +11,7 @@ class User:
     def __init__(self, data):
         self.id = data['id']
         self.username = data['username']
-        self.date_creaed = data['date_creaed']
+        self.date_created = data['date_created']
         self.date_updated = data['date_updated']
 
     @classmethod
@@ -35,28 +35,7 @@ class User:
         for result in results:
             list_users.append(cls(result))
         return list_users
-        query = """SELECT * FROM user
-            LEFT JOIN high_score ON high_score.user_id = %(user_id)s LIMIT 1"""
-
-        results = connectToMySQL(DATABASE).query_db(query, data)
-
-        if results:
-            user = cls(results[0])
-            user.highScore = []
-
-            for result in results:
-                highScore = {
-                    'id': result['id'],
-                    'difficulty': result['difficulty'],
-                    'obstacles': result['obstacles'],
-                    'obstaclesMove': result['obstaclesMove'],
-                    'peacefulMode': result['peacefulMode'],
-                    'date_created': result['date_created'],
-                    'date_updated': result['date_updated']
-                }
-                user.highScore.append(highScore_model.HighScore(highScore))
-            return user
-        return []
+        
 
     @classmethod
     def delete_user(cls, data):
@@ -69,7 +48,7 @@ class User:
     def check_database(cls, data):
         query = "SELECT * FROM user WHERE username = %(username)s"
         results = connectToMySQL(DATABASE).query_db(query, data)
-        if len(results) == 0:
+        if len(results):
             # the user does not exist yet
             return False
         return True
