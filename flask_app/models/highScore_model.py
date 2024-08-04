@@ -23,7 +23,6 @@ class HighScore:
         LEFT JOIN user ON user.id = high_score.user_id
         ORDER BY user.username ASC, high_score.high_score DESC"""
         results = connectToMySQL(DATABASE).query_db(query)
-        print("Query Results:", results)
         list_highScores = []
         for result in results:
             high_score = cls(result)
