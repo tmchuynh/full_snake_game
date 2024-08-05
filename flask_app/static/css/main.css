@@ -19,22 +19,23 @@ body {
 
 .wrapper {
   width: 75vmin;
-  height: 70vmin;
+  height: 70vmin !important;
   display: flex;
   overflow: hidden;
   flex-direction: column;
   justify-content: center;
   position: relative;
-  border-radius: 5px;
+  border-radius: 15px;
   background: #293447;
   box-shadow: 0 20px 40px rgba(52, 87, 220, 0.2);
 }
 
 .game-details {
   color: #b8c6dc;
+  background-color: #303b55;
   font-weight: 500;
   font-size: 1.2rem;
-  padding: 1em 3em;
+  padding: 1em 3em !important;
   position: absolute;
   top: 0;
   width: 100%;
@@ -89,7 +90,7 @@ button {
   display: grid;
   background: #212837;
   grid-template: repeat(30, 1fr) / repeat(30, 1fr);
-  margin-top: 8.5em;
+  /* margin-top: 8.5em; */
 }
 
 .play-board .obstacle {

@@ -210,6 +210,9 @@ const handleGameOver = () => {
 increaseObstaclesNum.addEventListener("click", () => {
   numOfObstacles++;
   calculateRatio();
+  if (numOfObstacles > 45) {
+    numOfObstacles = 45;
+  }
   obstaclesNum.innerHTML = numOfObstacles;
   updateAll();
 })
@@ -217,6 +220,9 @@ increaseObstaclesNum.addEventListener("click", () => {
 decreaseObstaclesNum.addEventListener("click", () => {
   numOfObstacles--;
   calculateRatio();
+  if (numOfObstacles < 0) {
+    numOfObstacles = 0;
+  }
   obstaclesNum.innerHTML = numOfObstacles;
   updateAll();
 })
