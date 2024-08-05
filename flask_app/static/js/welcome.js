@@ -117,3 +117,7 @@ function closeModal() {
 }
 
 showFirstModal("Let's play!");
+
+function redirectToSnakeGame() {
+    window.location.href = "/snake_game";
+}
